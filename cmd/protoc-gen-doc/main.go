@@ -19,7 +19,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/pseudomuto/protoc-gen-doc"
+	"github.com/nejcgalof/protoc-gen-doc-req"
 )
 
 func main() {
