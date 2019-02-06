@@ -39,26 +39,26 @@ func NewTemplate(descs []*protokit.FileDescriptor) *Template {
 		}
 
 		for _, e := range f.Enums {
-			//file.Enums = append(file.Enums, parseEnum(e))
+			file.Enums = append(file.Enums, parseEnum(e))
 		}
 
 		for _, e := range f.Extensions {
-			//file.Extensions = append(file.Extensions, parseFileExtension(e))
+			file.Extensions = append(file.Extensions, parseFileExtension(e))
 		}
 
 		// Recursively add nested types from messages
 		var addFromMessage func(*protokit.Descriptor)
 		addFromMessage = func(m *protokit.Descriptor) {
-		//	file.Messages = append(file.Messages, parseMessage(m))
+			file.Messages = append(file.Messages, parseMessage(m))
 			for _, e := range m.Enums {
-			//	file.Enums = append(file.Enums, parseEnum(e))
+				file.Enums = append(file.Enums, parseEnum(e))
 			}
 			for _, n := range m.Messages {
-				//addFromMessage(n)
+				addFromMessage(n)
 			}
 		}
 		for _, m := range f.Messages {
-			//addFromMessage(m)
+			addFromMessage(m)
 		}
 
 		for _, s := range f.Services {
